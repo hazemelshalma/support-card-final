@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
@@ -16,7 +16,7 @@
     }
     .container {
       margin: auto;
-      max-width: 900px;
+      max-width: 1080px;
       background: #fff;
       padding: 20px;
       border-radius: 10px;
@@ -66,7 +66,7 @@
       <button id="cropBtn">اعتماد القص</button>
     </div>
     <button id="generateBtn" class="hidden">إنشاء كارت الدعم</button>
-    <canvas id="finalCanvas" width="800" height="1000"></canvas>
+    <canvas id="finalCanvas" width="1080" height="1920"></canvas>
     <br>
     <a id="downloadBtn" download="card.png">تحميل الكارت</a>
   </div>
@@ -115,7 +115,7 @@
       }
       const ctx = finalCanvas.getContext('2d');
       const bg = new Image();
-      bg.src = "support-bg.png";
+      bg.src = "support-bg.png";  // الخلفية بحجم 1080×1920
       const userImg = new Image();
       userImg.src = croppedImageData;
 
@@ -132,26 +132,27 @@
       ctx.clearRect(0, 0, finalCanvas.width, finalCanvas.height);
       ctx.drawImage(bg, 0, 0, finalCanvas.width, finalCanvas.height);
 
-      const circleX = 230, circleY = 320, radius = 120;
+      // الصورة في الأعلى
+      const imageX = (finalCanvas.width - 320) / 2;
+      const imageY = 180;
+      const radius = 160;
+
       ctx.save();
       ctx.beginPath();
-      ctx.arc(circleX, circleY, radius, 0, 2 * Math.PI);
+      ctx.arc(imageX + radius, imageY + radius, radius, 0, 2 * Math.PI);
       ctx.closePath();
       ctx.clip();
-      ctx.drawImage(userImg, circleX - radius, circleY - radius, 2 * radius, 2 * radius);
+      ctx.drawImage(userImg, imageX, imageY, 2 * radius, 2 * radius);
       ctx.restore();
 
+      // الاسم تحت الصورة
       ctx.fillStyle = "#000";
-      ctx.font = "bold 26px 'Cairo'";
+      ctx.font = "bold 38px 'Cairo'";
       ctx.textAlign = "center";
       ctx.strokeStyle = "#fff";
-      ctx.lineWidth = 3;
-      ctx.strokeText(nameInput.value, circleX, circleY + radius + 40);
-      ctx.fillText(nameInput.value, circleX, circleY + radius + 40);
-
-      ctx.font = "bold 16px 'Cairo'";
-      ctx.fillStyle = "#444";
-      ctx.fillText("#هنكمل_المشوار", finalCanvas.width - 150, finalCanvas.height - 30);
+      ctx.lineWidth = 4;
+      ctx.strokeText(nameInput.value, finalCanvas.width / 2, imageY + 2 * radius + 50);
+      ctx.fillText(nameInput.value, finalCanvas.width / 2, imageY + 2 * radius + 50);
 
       finalCanvas.style.display = "block";
       downloadBtn.style.display = "inline-block";
@@ -160,3 +161,4 @@
   </script>
 </body>
 </html>
+
