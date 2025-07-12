@@ -68,7 +68,7 @@
       <button id="cropBtn">اعتماد القص</button>
     </div>
     <button id="generateBtn" class="hidden">إنشاء كارت الدعم</button>
-    <canvas id="finalCanvas" width="1080" height="1920"></canvas>
+    <canvas id="finalCanvas" width="1080" height="1350"></canvas>
     <br>
     <a id="downloadBtn" download="card.png">تحميل الكارت</a>
     <a id="goToPageBtn" href="https://www.facebook.com/profile.php?id=61578096533832" target="_blank">زيارة صفحتنا</a>
@@ -136,9 +136,9 @@
       ctx.clearRect(0, 0, finalCanvas.width, finalCanvas.height);
       ctx.drawImage(bg, 0, 0, finalCanvas.width, finalCanvas.height);
 
-      // صورة الشخص في منتصف أعلى التصميم (مسافة متوسطة)
+      // موضع الدائرة في الأعلى
       const imageX = (finalCanvas.width - 320) / 2;
-      const imageY = 160; // تم تقليل الرفع مقارنة بالسابق
+      const imageY = 80;  // مسافة صغيرة من الأعلى
       const radius = 160;
 
       ctx.save();
@@ -149,14 +149,14 @@
       ctx.drawImage(userImg, imageX, imageY, 2 * radius, 2 * radius);
       ctx.restore();
 
-      // كتابة الاسم تحت الصورة بلون أزرق غامق
+      // كتابة الاسم تحت الدائرة بلون أزرق غامق
       ctx.fillStyle = "#003366";
       ctx.font = "bold 42px 'Cairo'";
       ctx.textAlign = "center";
       ctx.strokeStyle = "#fff";
       ctx.lineWidth = 4;
-      ctx.strokeText(nameInput.value, finalCanvas.width / 2, imageY + 2 * radius + 45);
-      ctx.fillText(nameInput.value, finalCanvas.width / 2, imageY + 2 * radius + 45);
+      ctx.strokeText(nameInput.value, finalCanvas.width / 2, imageY + 2 * radius + 40);
+      ctx.fillText(nameInput.value, finalCanvas.width / 2, imageY + 2 * radius + 40);
 
       finalCanvas.style.display = "block";
       downloadBtn.style.display = "inline-block";
@@ -166,4 +166,5 @@
   </script>
 </body>
 </html>
+
 
