@@ -136,9 +136,9 @@
       ctx.clearRect(0, 0, finalCanvas.width, finalCanvas.height);
       ctx.drawImage(bg, 0, 0, finalCanvas.width, finalCanvas.height);
 
-      // رفع الصورة لأعلى
+      // صورة الشخص في منتصف أعلى التصميم (مسافة متوسطة)
       const imageX = (finalCanvas.width - 320) / 2;
-      const imageY = 100; // مكان أعلى من قبل
+      const imageY = 160; // تم تقليل الرفع مقارنة بالسابق
       const radius = 160;
 
       ctx.save();
@@ -149,14 +149,14 @@
       ctx.drawImage(userImg, imageX, imageY, 2 * radius, 2 * radius);
       ctx.restore();
 
-      // الاسم بلون أزرق غامق #003366
+      // كتابة الاسم تحت الصورة بلون أزرق غامق
       ctx.fillStyle = "#003366";
       ctx.font = "bold 42px 'Cairo'";
       ctx.textAlign = "center";
       ctx.strokeStyle = "#fff";
       ctx.lineWidth = 4;
-      ctx.strokeText(nameInput.value, finalCanvas.width / 2, imageY + 2 * radius + 50);
-      ctx.fillText(nameInput.value, finalCanvas.width / 2, imageY + 2 * radius + 50);
+      ctx.strokeText(nameInput.value, finalCanvas.width / 2, imageY + 2 * radius + 45);
+      ctx.fillText(nameInput.value, finalCanvas.width / 2, imageY + 2 * radius + 45);
 
       finalCanvas.style.display = "block";
       downloadBtn.style.display = "inline-block";
