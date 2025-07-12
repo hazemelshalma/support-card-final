@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
@@ -36,9 +36,9 @@
       max-width: 100%;
       margin-top: 20px;
     }
-    #downloadBtn {
+    #downloadBtn, #goToPageBtn {
       display: none;
-      margin-top: 20px;
+      margin: 10px 10px;
       font-size: 18px;
       text-decoration: none;
       background-color: #4CAF50;
@@ -46,7 +46,9 @@
       padding: 10px 20px;
       border-radius: 5px;
     }
-    #downloadBtn:hover { background-color: #45a049; }
+    #downloadBtn:hover, #goToPageBtn:hover {
+      background-color: #45a049;
+    }
   </style>
 </head>
 <body>
@@ -69,6 +71,7 @@
     <canvas id="finalCanvas" width="1080" height="1920"></canvas>
     <br>
     <a id="downloadBtn" download="card.png">تحميل الكارت</a>
+    <a id="goToPageBtn" href="https://www.facebook.com/profile.php?id=61578096533832" target="_blank">زيارة صفحتنا</a>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
@@ -82,6 +85,7 @@
     const generateBtn = document.getElementById('generateBtn');
     const finalCanvas = document.getElementById('finalCanvas');
     const downloadBtn = document.getElementById('downloadBtn');
+    const goToPageBtn = document.getElementById('goToPageBtn');
     const nameInput = document.getElementById('nameInput');
 
     imageInput.addEventListener('change', function() {
@@ -115,7 +119,7 @@
       }
       const ctx = finalCanvas.getContext('2d');
       const bg = new Image();
-      bg.src = "support-bg.png";  // الخلفية بحجم 1080×1920
+      bg.src = "support-bg.png";
       const userImg = new Image();
       userImg.src = croppedImageData;
 
@@ -132,9 +136,9 @@
       ctx.clearRect(0, 0, finalCanvas.width, finalCanvas.height);
       ctx.drawImage(bg, 0, 0, finalCanvas.width, finalCanvas.height);
 
-      // الصورة في الأعلى
+      // رفع الصورة لأعلى
       const imageX = (finalCanvas.width - 320) / 2;
-      const imageY = 180;
+      const imageY = 100; // مكان أعلى من قبل
       const radius = 160;
 
       ctx.save();
@@ -145,9 +149,9 @@
       ctx.drawImage(userImg, imageX, imageY, 2 * radius, 2 * radius);
       ctx.restore();
 
-      // الاسم تحت الصورة
-      ctx.fillStyle = "#000";
-      ctx.font = "bold 38px 'Cairo'";
+      // الاسم بلون أزرق غامق #003366
+      ctx.fillStyle = "#003366";
+      ctx.font = "bold 42px 'Cairo'";
       ctx.textAlign = "center";
       ctx.strokeStyle = "#fff";
       ctx.lineWidth = 4;
@@ -156,6 +160,7 @@
 
       finalCanvas.style.display = "block";
       downloadBtn.style.display = "inline-block";
+      goToPageBtn.style.display = "inline-block";
       downloadBtn.href = finalCanvas.toDataURL("image/png");
     }
   </script>
